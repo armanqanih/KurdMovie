@@ -25,7 +25,7 @@ class MovieEntity (
     val vote_count: Int?
 )
 
-@Entity(tableName = "movie_list")
+
 data class MovieListEntity(
     val page: Int,
     val movies: List<MovieEntity>,

@@ -113,5 +113,9 @@
     <string name="emile1">Email</string>
     <string name="add_chat">add member\n</string>
     <string name="loading_more_data">Getting more...</string>
+    <string name="popular">popular</string>
+    <string name="upcoming">upcoming</string>
+    <string name="popular_movie">Popular Movie</string>
+    <string name="upcoming_movie">UpComing Movie</string>
 
 </resources>

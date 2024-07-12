@@ -10,17 +10,22 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.navArgument
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import org.lotka.xenonx.presentation.ui.navigation.ScreensNavigation
 import org.lotka.xenonx.presentation.ui.navigation.NavigatorScreen
-
+import org.lotka.xenonx.presentation.ui.screen.home.HomeScreen
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -59,31 +64,23 @@ fun HomeApp(
                 composable(
                     route = ScreensNavigation.HomeScreen.route,
                 ) {
-
-                    NavigatorScreen()
-
-//                  PlpScreen(
-//                      navController = navController,
-//                      onNavigateToRecipeDetailScreen = onNavigateToRecipeDetailScreen,
-//                      isDarkTheme = isDarkTheme,
-//                      onToggleTheme = onToggleTheme,
-//                      viewModel = plpViewModel
-//                  )
-
+                     HomeScreen(navController)
                 }
                 composable(
-                    route = ScreensNavigation.single_chat_screen.route,
-                ) {
-
-
+                    ScreensNavigation.DetailsScreen.route + "/{movieId}",
+                    arguments = listOf(
+                        navArgument("movieId") { type = NavType.IntType }
+                    )
+                ) { backStackEntry ->
+//                    DetailsScreen(backStackEntry)
                 }
 
             }
 
         },
     )
+    }
 
-}
 
 
 

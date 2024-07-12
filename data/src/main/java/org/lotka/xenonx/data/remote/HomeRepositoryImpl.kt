@@ -13,7 +13,7 @@ import org.lotka.xenonx.domain.util.Resource
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class RepositoryImpl@Inject constructor(
+class HomeRepositoryImpl@Inject constructor(
     private val movieApi: MovieApi,
     private val movieDatabase: MovieDataBase
 ): HomeRepository {

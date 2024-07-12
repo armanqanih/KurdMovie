@@ -1,6 +1,7 @@
 package org.lotka.xenonx.data.dto
 
-import org.lotka.xenonx.domain.model.MovieListModel
+import org.lotka.xenonx.data.local.movie.MovieListEntity
+import org.lotka.xenonx.data.mapper.toMovieEntity
 
 data class MovieListDto(
     val page: Int,
@@ -10,9 +11,3 @@ data class MovieListDto(
 )
 
 
-fun MovieListDto.toDomain() = MovieListModel(
-    page = page,
-    movies = movies.map { it.toDomain() },
-    total_pages = total_pages,
-    total_results = total_results
-)

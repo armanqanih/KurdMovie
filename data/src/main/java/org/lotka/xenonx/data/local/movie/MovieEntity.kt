@@ -12,7 +12,7 @@ class MovieEntity (
     val category: String?,
     val adult: Boolean?,
     val backdrop_path: String?,
-    val genre_ids: List<Int>?,
+    val genre_ids: String?,
     val original_language: String?,
     val original_title: String?,
     val overview: String?,
@@ -24,3 +24,12 @@ class MovieEntity (
     val vote_average: Double?,
     val vote_count: Int?
 )
+
+@Entity(tableName = "movie_list")
+data class MovieListEntity(
+    val page: Int,
+    val movies: List<MovieEntity>,
+    val total_pages: Int,
+    val total_results: Int
+)
+

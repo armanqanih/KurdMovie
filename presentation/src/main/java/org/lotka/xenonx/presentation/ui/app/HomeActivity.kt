@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
                     HomeApp(
                         activity = this@HomeActivity,
                         navController = navController,
-                        onNavigateToRecipeDetailScreen = { navController.navigate(ScreensNavigation.single_chat_screen.route) },
+                        onNavigateToRecipeDetailScreen = { navController.navigate(ScreensNavigation.DetailsScreen.route) },
                         isDarkTheme = false,
                         onToggleTheme = { },
                         keyboardController = keyboardController,

@@ -47,7 +47,7 @@ fun HomeApp(
 
         content = { _ ->
             NavHost(navController = navController,
-                startDestination = ScreensNavigation.NavigatorRoutScreen.route,
+                startDestination = ScreensNavigation.HomeScreen.route,
                 enterTransition = {
                     // you can change whatever you want transition
                     EnterTransition.None
@@ -57,7 +57,7 @@ fun HomeApp(
                     ExitTransition.None
                 }) {
                 composable(
-                    route = ScreensNavigation.NavigatorRoutScreen.route,
+                    route = ScreensNavigation.HomeScreen.route,
                 ) {
 
                     NavigatorScreen()

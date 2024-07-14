@@ -52,6 +52,7 @@ dependencies {
     implementation("androidx.paging:paging-common-android:3.3.0")
     implementation("androidx.paging:paging-compose-android:3.3.0")
     implementation("androidx.compose.material3:material3-android:1.2.1")
+    implementation(project(":data"))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -72,6 +73,11 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
+
+
+    // Extended Icons
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+
 
     //Splash Api
     implementation ("androidx.core:core-splashscreen:1.0.1")

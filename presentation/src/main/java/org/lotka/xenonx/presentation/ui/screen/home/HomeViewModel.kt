@@ -23,6 +23,7 @@ class HomeViewModel @Inject constructor(
   private val _state = MutableStateFlow(MovieListState())
   val state = _state.asStateFlow()
 
+
   init {
     viewModelScope.launch {
     getPopularMovieList(false)

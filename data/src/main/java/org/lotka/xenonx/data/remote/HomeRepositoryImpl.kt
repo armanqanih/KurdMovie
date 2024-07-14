@@ -17,9 +17,10 @@ class HomeRepositoryImpl@Inject constructor(
     private val movieApi: MovieApi,
     private val movieDatabase: MovieDataBase
 ): HomeRepository {
-    override suspend fun getMovies(fromFetchRemote: Boolean,category: String, page: Int): Flow<Resource<List<MovieModel>>> {
+    override suspend fun getMovies(fromFetchRemote: Boolean, category: String, page: Int): Flow<Resource<List<MovieModel>>> {
         return flow {
             emit(Resource.Loading(true))
+
             val localMovieList = movieDatabase.movieDao().getMoviesByCategory(category)
             val shouldLoadLocalMovie = localMovieList.isNotEmpty() && !fromFetchRemote
             if (shouldLoadLocalMovie) {
@@ -28,7 +29,6 @@ class HomeRepositoryImpl@Inject constructor(
                         movieEntity.toMovie(category)
                     }
                 ))
-
                 emit(Resource.Loading(false))
                 return@flow
             }
@@ -37,30 +37,38 @@ class HomeRepositoryImpl@Inject constructor(
                 movieApi.getMovies(category, page)
             } catch (e: IOException) {
                 e.printStackTrace()
-                emit(Resource.Error(message = "Error loading movies"))
+                emit(Resource.Error(message = "Error loading movies: ${e.localizedMessage}"))
+                emit(Resource.Loading(false))
                 return@flow
             } catch (e: HttpException) {
                 e.printStackTrace()
-                emit(Resource.Error(message = "Error loading movies"))
+                emit(Resource.Error(message = "Error loading movies: ${e.localizedMessage}"))
+                emit(Resource.Loading(false))
                 return@flow
             } catch (e: Exception) {
                 e.printStackTrace()
-                emit(Resource.Error(message = "Error loading movies"))
+                emit(Resource.Error(message = "Error loading movies: ${e.localizedMessage}"))
+                emit(Resource.Loading(false))
                 return@flow
             }
 
-            val movieEntities = movieListFromApi.movies.let {
-                it.map { movieDto ->
-                    movieDto.toMovieEntity(category)
-                }
+            val movieEntities = movieListFromApi?.movies?.map { movieDto ->
+                movieDto.toMovieEntity(category)
+            } ?: emptyList()
+
+            if (movieEntities.isNotEmpty()) {
+                movieDatabase.movieDao().upsertMovieList(movieEntities)
+                emit(Resource.Success(
+                    movieEntities.map { it.toMovie(category) }
+                ))
+            } else {
+                emit(Resource.Error(message = "No movies found"))
             }
-            movieDatabase.movieDao().upsertMovieList(movieEntities)
-            emit(Resource.Success(movieEntities.map { it.toMovie(category) }))
+
             emit(Resource.Loading(false))
-
         }
-
     }
+
 
     override suspend fun getMovieById(id: Int): Flow<Resource<MovieModel>> {
        return flow{

@@ -6,6 +6,7 @@ import org.lotka.xenonx.domain.model.MovieModel
 /**
  * @author Android Devs Academy (arman sherwanii)
  */
+
 data class MovieListState(
     val isLoading: Boolean = false,
 

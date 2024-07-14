@@ -28,8 +28,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 
 import org.lotka.xenonx.presentation.R
-import org.lotka.xenonx.presentation.util.Dimens
-import org.lotka.xenonx.presentation.util.Dimens.MediumPadding1
 
 fun Modifier.shimmerEffect(cornerRadius: CornerRadius = CornerRadius(x = 12f, y = 12f)) = composed {
     val transition = rememberInfiniteTransition(label = "shimmer effect")
